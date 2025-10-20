@@ -1,0 +1,750 @@
+:root {
+  --primary-color: #1a365d;
+  --secondary-color: #0060e6;
+  --background-color: #f8f9fa;
+  --text-color: #333;
+  --header-height: 60px;
+  --transition-duration: 0.3s;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "BIZ UDPMincho", serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header Styles */
+.header {
+  background-color: #fff;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  /* position: sticky; */
+  top: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.logo p {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 10px 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0; /* 初期状態: 幅をゼロにして非表示 */
+  height: 2px;
+  background-color: var(--secondary-color); /* ボーダーの色 */
+  transition: width 0.3s ease-out; /* 幅のアニメーションを設定 */
+}
+
+.nav-link:hover::after {
+  width: 100%; /* ホバー時: 幅を100%にして全幅に伸ばす */
+}
+
+.nav-link:hover {
+  color: var(--secondary-color);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  min-width: 250px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu li {
+  list-style: none;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px 20px;
+  color: var(--text-color);
+  text-decoration: none;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f8f9fa;
+  color: var(--secondary-color);
+}
+
+/* Hero Section */
+.hero {
+  /* background: linear-gradient(135deg, #3d79b6 0%, #115eac 100%); */
+  padding: 80px 100px;
+  text-align: left;
+}
+
+.hero-title {
+  font-size: 38px;
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 0.3rem;
+}
+
+/* Mission Section */
+.mission {
+  padding: 40px 100px;
+  color: var(--primary-color);
+  /* background-color: #f8f9fa; */
+  /* background-image: url("img/sky.png"); */
+  width: 100%;
+  height: 600px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* スライドショーのスタイル設定 */
+.slideshow-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  /* ★フェードとぼかしの両方にトランジションを設定 */
+  transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
+
+  opacity: 0;
+  filter: blur(0px); /* 初期はぼかしなし */
+}
+
+/* 現在表示中のレイヤー */
+.active-layer {
+  opacity: 1;
+  filter: blur(0px); /* アクティブ時はぼかしなし */
+}
+
+/* ★ぼかしながらフェードアウトするレイヤーに適用するクラス */
+.blur-out-layer {
+  filter: blur(20px); /* フェードアウト中に最大20pxぼかす */
+  opacity: 0; /* 透明になる */
+}
+
+.mission-content {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.mission-subtitle {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.mission-text {
+  font-size: 18px;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 0.3rem;
+}
+
+/* mission-messageクラスの背景デザイン */
+.mission-message {
+  position: relative;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  text-align: center;
+  color: #333;
+  width: 500px;
+  height: 500px;
+}
+
+/* 擬似要素1: 寒色系のぼかし円（左上） */
+.mission-message::before {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 420px;
+  translate: calc(-50%);
+
+  /* 色の透明度をわずかに上げる (0.25 → 0.35) */
+  background-color: rgba(68, 138, 255, 0.35);
+  border-radius: 50%;
+  filter: blur(20px);
+  z-index: -1;
+
+  /* ★アニメーション速度を落とし、スケールアニメーションを追加 */
+  animation: rotateCircle 10s linear infinite,
+    pulseScale 8s ease-in-out infinite alternate;
+}
+
+/* キーフレームアニメーションの変更 */
+@keyframes rotateCircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ★新規追加: 膨張・収縮アニメーション（パルス） */
+@keyframes pulseScale {
+  0% {
+    transform: scale(1); /* 初期スケール */
+  }
+  100% {
+    transform: scale(1.2); /* 20%拡大して、動きを強調 */
+  }
+}
+
+/* Strengths Section */
+.strengths {
+  padding: 80px 0;
+  background-color: #f8f9fa;
+}
+
+.strengths-subtitle {
+  text-align: center;
+  font-size: 18px;
+  color: var(--text-color);
+  margin-bottom: 50px;
+}
+
+.strengths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.strength-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.strength-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.strength-description {
+  padding: 0px 30px 40px;
+}
+
+.strength-number {
+  font-size: 48px;
+  font-weight: bold;
+  color: #1a365d;
+  margin-bottom: 20px;
+  line-height: 1;
+}
+
+.strength-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.strength-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.strength-link {
+  display: inline-block;
+  color: #1a365d;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  border: 2px solid #1a365d;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.strength-link:hover {
+  background-color: #1a365d;
+  color: white;
+}
+
+.strength-image-link {
+  text-decoration: none;
+}
+
+.strength-card img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+/* Information Section */
+.information {
+  padding: 80px 0;
+  background-color: #fff;
+}
+
+.info-subtitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.info-items {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 30px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.info-date {
+  font-size: 16px;
+  font-weight: bold;
+  color: #1a365d;
+  min-width: 80px;
+}
+
+.info-type {
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+  background-color: #f8f9fa;
+  padding: 4px 8px;
+  border-radius: 4px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.info-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-color);
+  flex: 1;
+}
+
+.info-more {
+  display: block;
+  text-align: center;
+  margin-top: 40px;
+  color: #1a365d;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 12px 24px;
+  border: 2px solid #1a365d;
+  border-radius: 4px;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.3s ease;
+}
+
+.info-more:hover {
+  background-color: #1a365d;
+  color: white;
+}
+
+/* Access Section */
+.access {
+  padding: 80px 0;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.access-subtitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 50px;
+}
+
+.access-info {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-info {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.address,
+.phone {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.address:hover {
+  color: var(--secondary-color);
+}
+
+.transport-info {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  gap: 20px;
+}
+
+.transport-item {
+  flex: 1;
+}
+
+.transport-item h5 {
+  font-size: 16px;
+  color: #1a365d;
+  margin-bottom: 10px;
+}
+
+.contact-btn {
+  display: inline-block;
+  background-color: #1a365d;
+  color: white;
+  text-decoration: none;
+  padding: 15px 30px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.contact-btn:hover {
+  background-color: #2d5a87;
+}
+
+.iframe-container {
+  position: relative;
+  width: 100%;
+  /* 16:9 のアスペクト比を維持するためのパディング (9 / 16 * 100 = 56.25%) */
+  padding-top: 56.25%;
+  margin-top: 20px;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--text-color);
+  color: white;
+  padding: 60px 0 30px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 80px;
+}
+
+.footer-logo p {
+  font-size: 18px;
+  color: #ccc;
+  margin-bottom: 40px;
+}
+
+.copyright {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 40px;
+}
+
+/* スクロールトップボタンのスタイル */
+#scrollToTopBtn {
+  font-family: poppuns, sans-serif;
+  gap: 5px;
+  /* 画面右下に固定配置 */
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  /* 見た目の調整 */
+  z-index: 99; /* 他の要素より手前に表示 */
+  background-color: #3498db; /* ボタンの背景色 */
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10%;
+  font-size: 20px;
+  line-height: 1.2;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+  /* 初期状態は非表示 */
+  display: none;
+
+  /* ホバー時の見た目の変化をスムーズにする */
+  transition: background-color 0.3s ease;
+}
+
+#scrollToTopBtn:hover {
+  background-color: #2980b9;
+}
+
+/* 補足: Google Icons (Material Symbols) の調整 */
+#scrollToTopBtn .material-symbols-outlined {
+  /* アイコンとテキストの高さを揃えるために、アイコンのサイズとマージンを調整 */
+  font-size: 20px;
+  /* Flexアイテムとなったアイコン自体の垂直方向の配置を微調整 (任意) */
+  /* アイコンのベースラインがテキストより上にズレる場合によく使われる調整 */
+  margin-top: 2px;
+  margin-right: 7px;
+}
+
+.scroll-comment {
+  margin-bottom: 2px;
+}
+
+.tile-big {
+  color: var(--text-color);
+  font-size: 38px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.tile-middle {
+  color: var(--text-color);
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.tile-small {
+  color: var(--text-color);
+  margin-right: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+/* 各タイルの共通スタイル */
+.tile {
+  /* オーバーレイ用に相対位置指定 */
+  position: relative;
+  width: 50px;
+  height: 50px;
+  /* タイルの色 */
+  /* background-color: #0048ac; */
+  opacity: 0;
+  transform: scale(0); /* 初期状態は縮小 */
+
+  /* アニメーション設定 */
+  animation-name: fill-in;
+  animation-duration: 1s; /* アニメーションの速度をさらに速く */
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+/* アニメーションのキーフレーム: 縮小から元のサイズへ */
+@keyframes fill-in {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- タイルごとのアニメーション遅延設定（左上から順番） --- */
+
+/* タイルのカスタムプロパティ（--n）を設定 */
+/* 30枚全てに :nth-child(N) で --n: N; を適用します。
+   :nth-childの書き出しを短縮するため、Sassなどのプリプロセッサを使うのが一般的ですが、ここでは標準CSSで記述します。
+*/
+/* .tile:nth-child(1) {
+  --n: 1;
+}
+.tile:nth-child(2) {
+  --n: 2;
+}
+.tile:nth-child(3) {
+  --n: 3;
+}
+.tile:nth-child(4) {
+  --n: 4;
+}
+.tile:nth-child(5) {
+  --n: 5;
+}
+.tile:nth-child(6) {
+  --n: 6;
+}
+.tile:nth-child(7) {
+  --n: 7;
+}
+.tile:nth-child(8) {
+  --n: 8;
+}
+.tile:nth-child(9) {
+  --n: 9;
+}
+.tile:nth-child(10) {
+  --n: 10;
+}
+.tile:nth-child(11) {
+  --n: 11;
+}
+.tile:nth-child(12) {
+  --n: 12;
+}
+.tile:nth-child(13) {
+  --n: 13;
+}
+.tile:nth-child(14) {
+  --n: 14;
+}
+.tile:nth-child(15) {
+  --n: 15;
+}
+.tile:nth-child(16) {
+  --n: 16;
+}
+.tile:nth-child(17) {
+  --n: 17;
+}
+.tile:nth-child(18) {
+  --n: 18;
+}
+.tile:nth-child(19) {
+  --n: 19;
+}
+.tile:nth-child(20) {
+  --n: 20;
+}
+.tile:nth-child(21) {
+  --n: 21;
+}
+.tile:nth-child(22) {
+  --n: 22;
+}
+.tile:nth-child(23) {
+  --n: 23;
+}
+.tile:nth-child(24) {
+  --n: 24;
+}
+.tile:nth-child(25) {
+  --n: 25;
+}
+.tile:nth-child(26) {
+  --n: 26;
+}
+.tile:nth-child(27) {
+  --n: 27;
+}
+.tile:nth-child(28) {
+  --n: 28;
+}
+.tile:nth-child(29) {
+  --n: 29;
+}
+.tile:nth-child(30) {
+  --n: 30;
+} */
+
+/* (N) 番目のタイルに (N-1) * 0.03秒の遅延を設定 */
+/* タイル数が増えたため、遅延時間を 0.03s に短縮し、全体の表示時間を調整 */
+.tile {
+  animation-delay: calc((var(--n) - 1) * 0.02s);
+}
