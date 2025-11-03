@@ -27,7 +27,7 @@ body {
   padding: 0 20px;
 }
 
-/* Header Styles */
+/* Header Section */
 .header {
   background-color: #fff;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
@@ -161,43 +161,13 @@ body {
   width: 100%;
   height: 600px;
 
-  position: relative;
-  overflow: hidden;
-}
-
-/* スライドショーのスタイル設定 */
-.slideshow-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-
-  /* ★フェードとぼかしの両方にトランジションを設定 */
-  transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
-
-  opacity: 0;
-  filter: blur(0px); /* 初期はぼかしなし */
-}
-
-/* 現在表示中のレイヤー */
-.active-layer {
-  opacity: 1;
-  filter: blur(0px); /* アクティブ時はぼかしなし */
-}
-
-/* ★ぼかしながらフェードアウトするレイヤーに適用するクラス */
-.blur-out-layer {
-  filter: blur(20px); /* フェードアウト中に最大20pxぼかす */
-  opacity: 0; /* 透明になる */
+  /* position: relative;
+  overflow: hidden; */
 }
 
 .mission-content {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
   padding: 15px 0;
 }
@@ -223,16 +193,15 @@ body {
   line-height: 1.8;
   max-width: 800px;
   margin: 0 0.3rem;
+  text-align: left;
 }
 
 /* mission-messageクラスの背景デザイン */
 .mission-message {
   position: relative;
   background-color: #ffffff;
-  padding: 40px;
-  border-radius: 50%;
+  padding: 30px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   z-index: 1;
   text-align: center;
   color: #333;
@@ -240,43 +209,110 @@ body {
   height: 500px;
 }
 
-/* 擬似要素1: 寒色系のぼかし円（左上） */
-.mission-message::before {
+.mission-introduction {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+  margin-top: 20px;
+  overflow: hidden; /* 背景の要素がはみ出さないように */
+  position: relative; /* 擬似要素を配置するための基準 */
+  background-color: #0b1f3c; /* ベースの濃い青色 */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* わずかな浮遊感を出す影 */
+}
+
+/* 🔵 グラデーション背景の定義 */
+.mission-introduction::before {
   content: "";
   position: absolute;
-  width: 450px;
-  height: 420px;
-  translate: calc(-50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* https://cssgradient.io/ */
+  background: linear-gradient(
+    168deg,
+    rgba(0, 166, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(237, 221, 83, 1) 100%
+  );
+  opacity: 1; /* 少し透明感を出す */
+  z-index: -2;
+}
 
-  /* 色の透明度をわずかに上げる (0.25 → 0.35) */
-  background-color: rgba(68, 138, 255, 0.35);
-  border-radius: 50%;
+.name-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+}
+
+.human-content {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 20px;
+  padding: 10px;
+}
+
+.mission-name {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+.manager {
+  border-bottom: solid 1px #1a365d;
+}
+
+.license {
+  text-align: end;
+  font-size: 16px;
+  color: #666;
+  margin-top: 10px;
+}
+
+.mission-image {
+  width: 500px;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* スライドショーのスタイル設定 */
+.slideshow-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5%;
+
+  /* ★フェードとぼかしの両方にトランジションを設定 */
+  transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
+  opacity: 0;
+  /* 初期はぼかしなし */
+  filter: blur(0px);
+}
+
+/* 現在表示中のレイヤー */
+.active-layer {
+  opacity: 1;
+  /* アクティブ時はぼかしなし */
+  filter: blur(0px);
+}
+
+/* ★ぼかしながらフェードアウトするレイヤーに適用するクラス */
+.blur-out-layer {
+  /* フェードアウト中に最大20pxぼかす */
   filter: blur(20px);
-  z-index: -1;
-
-  /* ★アニメーション速度を落とし、スケールアニメーションを追加 */
-  animation: rotateCircle 10s linear infinite,
-    pulseScale 8s ease-in-out infinite alternate;
-}
-
-/* キーフレームアニメーションの変更 */
-@keyframes rotateCircle {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ★新規追加: 膨張・収縮アニメーション（パルス） */
-@keyframes pulseScale {
-  0% {
-    transform: scale(1); /* 初期スケール */
-  }
-  100% {
-    transform: scale(1.2); /* 20%拡大して、動きを強調 */
-  }
+  /* 透明になる */
+  opacity: 0;
 }
 
 /* Strengths Section */
@@ -287,9 +323,11 @@ body {
 
 .strengths-subtitle {
   text-align: center;
-  font-size: 18px;
+  font-size: 28px;
+  font-weight: bold;
   color: var(--text-color);
   margin-bottom: 50px;
+  line-height: 1.4;
 }
 
 .strengths-grid {
@@ -312,13 +350,14 @@ body {
 }
 
 .strength-description {
+  min-height: 200px;
   padding: 0px 30px 40px;
 }
 
 .strength-number {
   font-size: 48px;
   font-weight: bold;
-  color: #1a365d;
+  color: var(--primary-color);
   margin-bottom: 20px;
   line-height: 1;
 }
@@ -340,7 +379,7 @@ body {
 
 .strength-link {
   display: inline-block;
-  color: #1a365d;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 500;
   padding: 8px 16px;
@@ -350,7 +389,7 @@ body {
 }
 
 .strength-link:hover {
-  background-color: #1a365d;
+  background-color: var(--primary-color);
   color: white;
 }
 
@@ -377,62 +416,101 @@ body {
   margin-bottom: 50px;
 }
 
-.info-items {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.info-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 30px 0;
-  border-bottom: 1px solid #e9ecef;
-}
-
-.info-date {
-  font-size: 16px;
-  font-weight: bold;
-  color: #1a365d;
-  min-width: 80px;
-}
-
-.info-type {
-  font-size: 14px;
-  font-weight: bold;
-  color: #666;
-  background-color: #f8f9fa;
-  padding: 4px 8px;
-  border-radius: 4px;
-  min-width: 80px;
-  text-align: center;
-}
-
 .info-text {
   font-size: 14px;
   line-height: 1.6;
   color: var(--text-color);
-  flex: 1;
+}
+
+.info-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 0;
+}
+
+.info-item {
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  /* padding: 40px; */
+  overflow: hidden;
+  z-index: 1;
+  text-align: center;
+  color: #333;
+  width: 300px;
+  height: 300px;
+  position: relative;
+}
+
+/* 擬似要素1: 寒色系のぼかし円（左上） */
+.info-item-blue::before {
+  content: "";
+  position: absolute;
+  width: 290px;
+  height: 300px;
+  translate: calc(-50%);
+
+  /* 色の透明度をわずかに上げる (0.25 → 0.35) */
+  background-color: rgba(68, 138, 255, 0.35);
+  border-radius: 50%;
+  filter: blur(20px);
+  z-index: -1;
+}
+
+/* 擬似要素2: 寒色系のぼかし円（左上） */
+.info-item-yellow::before {
+  content: "";
+  position: absolute;
+  width: 290px;
+  height: 300px;
+  translate: calc(-50%);
+
+  /* 色の透明度をわずかに上げる (0.25 → 0.35) */
+  background-color: rgba(255, 155, 68, 0.35);
+  border-radius: 50%;
+  filter: blur(20px);
+  z-index: -1;
+}
+
+/* 擬似要素2: 寒色系のぼかし円（左上） */
+.info-item-green::before {
+  content: "";
+  position: absolute;
+  width: 290px;
+  height: 300px;
+  translate: calc(-50%);
+
+  /* 色の透明度をわずかに上げる (0.25 → 0.35) */
+  background-color: rgba(84, 255, 68, 0.35);
+  border-radius: 50%;
+  filter: blur(20px);
+  z-index: -1;
+}
+
+.info-discription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 20px;
 }
 
 .info-more {
   display: block;
-  text-align: center;
-  margin-top: 40px;
-  color: #1a365d;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 500;
-  padding: 12px 24px;
+  padding: 3px 8px;
   border: 2px solid #1a365d;
   border-radius: 4px;
-  max-width: 200px;
-  margin-left: auto;
-  margin-right: auto;
   transition: all 0.3s ease;
 }
 
 .info-more:hover {
-  background-color: #1a365d;
+  background-color: var(--primary-color);
   color: white;
 }
 
@@ -465,9 +543,10 @@ body {
 .address,
 .phone {
   font-size: 16px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   color: var(--text-color);
   text-decoration: none;
+  padding: 10px 0;
 }
 
 .address:hover {
@@ -487,13 +566,13 @@ body {
 
 .transport-item h5 {
   font-size: 16px;
-  color: #1a365d;
+  color: var(--primary-color);
   margin-bottom: 10px;
 }
 
 .contact-btn {
   display: inline-block;
-  background-color: #1a365d;
+  background-color: var(--primary-color);
   color: white;
   text-decoration: none;
   padding: 15px 30px;
@@ -646,105 +725,365 @@ body {
   }
 }
 
-/* --- タイルごとのアニメーション遅延設定（左上から順番） --- */
-
-/* タイルのカスタムプロパティ（--n）を設定 */
-/* 30枚全てに :nth-child(N) で --n: N; を適用します。
-   :nth-childの書き出しを短縮するため、Sassなどのプリプロセッサを使うのが一般的ですが、ここでは標準CSSで記述します。
-*/
-/* .tile:nth-child(1) {
-  --n: 1;
-}
-.tile:nth-child(2) {
-  --n: 2;
-}
-.tile:nth-child(3) {
-  --n: 3;
-}
-.tile:nth-child(4) {
-  --n: 4;
-}
-.tile:nth-child(5) {
-  --n: 5;
-}
-.tile:nth-child(6) {
-  --n: 6;
-}
-.tile:nth-child(7) {
-  --n: 7;
-}
-.tile:nth-child(8) {
-  --n: 8;
-}
-.tile:nth-child(9) {
-  --n: 9;
-}
-.tile:nth-child(10) {
-  --n: 10;
-}
-.tile:nth-child(11) {
-  --n: 11;
-}
-.tile:nth-child(12) {
-  --n: 12;
-}
-.tile:nth-child(13) {
-  --n: 13;
-}
-.tile:nth-child(14) {
-  --n: 14;
-}
-.tile:nth-child(15) {
-  --n: 15;
-}
-.tile:nth-child(16) {
-  --n: 16;
-}
-.tile:nth-child(17) {
-  --n: 17;
-}
-.tile:nth-child(18) {
-  --n: 18;
-}
-.tile:nth-child(19) {
-  --n: 19;
-}
-.tile:nth-child(20) {
-  --n: 20;
-}
-.tile:nth-child(21) {
-  --n: 21;
-}
-.tile:nth-child(22) {
-  --n: 22;
-}
-.tile:nth-child(23) {
-  --n: 23;
-}
-.tile:nth-child(24) {
-  --n: 24;
-}
-.tile:nth-child(25) {
-  --n: 25;
-}
-.tile:nth-child(26) {
-  --n: 26;
-}
-.tile:nth-child(27) {
-  --n: 27;
-}
-.tile:nth-child(28) {
-  --n: 28;
-}
-.tile:nth-child(29) {
-  --n: 29;
-}
-.tile:nth-child(30) {
-  --n: 30;
-} */
-
 /* (N) 番目のタイルに (N-1) * 0.03秒の遅延を設定 */
 /* タイル数が増えたため、遅延時間を 0.03s に短縮し、全体の表示時間を調整 */
 .tile {
   animation-delay: calc((var(--n) - 1) * 0.02s);
 }
+
+/* ギャラリーの配置 */
+.gallery {
+  display: flex;
+  gap: 10px;
+}
+
+.gallery img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.3s;
+}
+
+.gallery img:hover {
+  border: 2px solid #007bff;
+}
+
+.lightbox-trigger {
+  /* デフォルトのテキストデコレーション（下線）を削除 */
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  /* ホバー時の変化を滑らかにするためのトランジション（オプション） */
+  transition: color 0.3s ease;
+  padding: 10px 0;
+  position: relative;
+}
+
+.lightbox-trigger::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0; /* 初期状態: 幅をゼロにして非表示 */
+  height: 2px;
+  background-color: var(--secondary-color); /* ボーダーの色 */
+  transition: width 0.3s ease-out; /* 幅のアニメーションを設定 */
+}
+
+.lightbox-trigger:hover::after {
+  width: 100%; /* ホバー時: 幅を100%にして全幅に伸ばす */
+}
+
+.lightbox-trigger:hover {
+  color: var(--secondary-color);
+}
+
+/* 🔦 ライトボックス (モーダル) スタイル */
+.lightbox {
+  display: none; /* 初期状態では非表示 */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 1);
+  overflow: auto;
+  /* ライトボックス自体のフェードイン */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.lightbox.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1; /* ライトボックスが表示されたら完全に不透明に */
+}
+
+/* 🔦 ライトボックス (モーダル) スタイル - 関連修正 */
+.lightbox-content {
+  /* 画像とキャプションを縦に中央揃えするための調整 */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 横方向中央揃え */
+  justify-content: center; /* 縦方向中央揃え */
+
+  margin: auto;
+  max-width: 90%;
+  max-height: 90%;
+  transition: transform 0.3s ease-out;
+}
+
+/* 💡 コメント・ページ番号エリアのスタイル */
+.lightbox-caption {
+  color: #fff;
+  text-align: center;
+  padding: 10px 20px;
+  background-color: var(--primary-color); /* 見やすくするために背景を追加 */
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  font-size: 16px;
+  /* 下の角を丸く */
+  border-bottom-left-radius: 10px; /* 左下 */
+  border-bottom-right-radius: 10px; /* 右下 */
+}
+
+#caption-text {
+  margin: 5px 0;
+}
+
+#page-counter {
+  margin: 5px 0;
+  font-size: 0.9em;
+}
+
+/* 💡 画像のアニメーションのラッパー (変更点: transform を削除) */
+.lightbox-image-wrapper {
+  position: relative;
+  /* 非表示時の初期状態 (透明) */
+  opacity: 0;
+  /* opacity にのみトランジションを設定 */
+  transition: opacity 0.3s ease-out;
+  /* 画像と同じ最大サイズを適用し、ビューポートを基準としたサイズを制限 */
+  max-width: 100vw;
+  max-height: 80vh;
+  /* ラッパー内での画像のサイズ調整を可能にする */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* 上の角を丸く */
+  border-top-left-radius: 10px; /* 左上 */
+  border-top-right-radius: 10px; /* 右上 */
+}
+
+/* 💡 画像表示時の状態 (通常の位置、不透明) */
+.lightbox.active .lightbox-image-wrapper.show {
+  opacity: 1; /* フェードインして表示 */
+}
+
+#lightbox-image {
+  width: auto;
+  height: auto;
+  max-width: 100vw;
+  max-height: 80vh;
+  display: block;
+  object-fit: contain;
+}
+
+/* ❌ 閉じるボタン */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #bbb;
+  opacity: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ◀️ ▶️ カルーセルボタン */
+.prev-btn,
+.next-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 1;
+}
+
+.prev-btn {
+  left: 10px;
+  border-radius: 3px 0 0 3px;
+}
+
+.next-btn {
+  right: 10px;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev-btn:hover,
+.next-btn:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
+/* Comparison Section */
+.price {
+  padding: 80px 0;
+  background-color: #fff;
+  text-align: center;
+}
+
+.comparison-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.comparison-table {
+  display: grid;
+  /* 4つの列: ラベル, 購入ヘッダー, レンタルヘッダー, 補足 */
+  grid-template-columns: 250px 1.5fr 1.5fr;
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* --- ヘッダー行 (購入/レンタル) のスタイル --- */
+.table-header {
+  display: contents; /* grid-template-columns の定義に沿って要素を配置 */
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* 左上角は空白 */
+.col-head {
+  background-color: #f0f0f0; /* 薄い灰色 */
+}
+
+/* 購入する場合のヘッダー */
+.col-buy {
+  background-color: #49647d; /* 濃い青 */
+  padding: 15px 10px;
+}
+
+/* レンタルする場合のヘッダー */
+.col-rent {
+  background-color: #5cb85c; /* 濃い緑 */
+  padding: 15px 10px;
+}
+
+/* --- データ行のスタイル --- */
+.table-row {
+  display: contents;
+}
+
+.table-row > div:first-child {
+  border-top: 1px solid #ddd;
+}
+
+.table-row > div {
+  padding: 15px 10px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.col-label.total-label {
+  font-size: 24px;
+  color: #333333;
+}
+
+/* ラベル列 (左側) */
+.col-label {
+  background-color: #f0f0f0; /* 薄い灰色 */
+  color: #666; /* 濃い灰色 */
+  font-size: 16px;
+  font-weight: bold;
+  justify-content: flex-start; /* 左寄せ */
+  padding-left: 20px;
+}
+
+/* 購入データ列の基本スタイル */
+.col-buy.data-white {
+  background-color: #ffffff;
+  color: #333333; /* 濃い文字色 */
+}
+
+/* レンタルデータ列の基本スタイル */
+.col-rent.data-green {
+  background-color: #ffffff;
+  color: #5cb85c; /* 緑の文字色 */
+  font-weight: bold;
+}
+
+/* 日数 (購入) の補足 */
+.col-buy.data-buy-note {
+  background-color: #ffffff;
+  color: #666;
+  font-size: 14px;
+  justify-content: center;
+}
+
+/* 購入費用合計 */
+.total-row .total-buy {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333333;
+}
+
+/* レンタル費用合計 */
+.total-row .total-rent {
+  background-color: #e6ffe6; /* 薄い緑の背景 */
+  color: #5cb85c;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.total-label {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+/* 下部の比較テキストエリア */
+.footnote-area {
+  text-align: center;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.summary-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* summary-text 内の強調したい span タグのスタイル */
+.summary-text span {
+  color: red; /* 濃い赤色で強調 */
+  font-weight: bold; /* さらに目立たせるために太字にする (任意) */
+}
+
+/* 補足の注意書き (画像には含まれていませんが、スペース確保のため) */
+.col-buy.data-white:first-child::before {
+  content: "※一般的な販売価格";
+  font-size: 10px;
+  color: #666;
+  position: absolute;
+  top: 50px;
+  transform: translateX(-50%);
+  margin-left: 5px;
+}
+
+/* アイコンや特殊文字の微調整はCSSのみでは限界があるため、HTMLの文字で代用しています。*/
