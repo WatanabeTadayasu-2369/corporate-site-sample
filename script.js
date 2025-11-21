@@ -27,13 +27,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // ターゲット要素を取得
       const targetElement = document.querySelector(targetId);
+      const headerHeight = 90; // 固定ヘッダーの高さ (px)
 
       if (targetElement) {
-        // ターゲットまでスムーズにスクロール
-        targetElement.scrollIntoView({
-          behavior: "smooth", // スムーズなアニメーションを有効化
-          block: "start", // 要素をビューポートの上端に合わせる
-          // block: 'center'   // 要素をビューポートの中央に合わせることも可能
+        // ターゲット要素の上端からドキュメント上端までのピクセル数を取得
+        const targetPosition = targetElement.offsetTop;
+
+        // スムーズスクロールで移動したい最終位置を計算
+        // targetPosition から headerHeight を引く
+        const scrollToPosition = targetPosition - headerHeight;
+
+        // window.scrollTo() を使用してスクロールを実行
+        window.scrollTo({
+          top: scrollToPosition, // 計算した位置にスクロール
+          behavior: "smooth", // スムーズアニメーションを有効化
         });
       }
     });
