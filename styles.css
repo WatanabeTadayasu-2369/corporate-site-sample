@@ -1,10 +1,13 @@
 :root {
   --primary-color: #1a365d;
+  --primary-color-hover: #7e7f7f;
   --secondary-color: #0060e6;
   --background-color: #f8f9fa;
   --text-color: #333;
   --header-height: 60px;
   --transition-duration: 0.3s;
+  --ivory-color: #fff9dc;
+  --ivory-color-strong: #ffd768;
 }
 
 /* Reset and Base Styles */
@@ -169,11 +172,148 @@ body {
   color: var(--secondary-color);
 }
 
+/* ハンバーガーアイコンの初期設定（非表示） */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  position: relative;
+  z-index: 10; /* 他の要素の上に表示 */
+}
+
+.menu-toggle .line {
+  display: block;
+  width: 25px;
+  height: 4px;
+  background-color: #424242;
+  margin: 6px 0;
+  transition: 0.3s; /* アニメーションを滑らかにする */
+}
+
+/* --- .is-active クラスが適用されたときのスタイル（「X」への変形） --- */
+
+/* 1. 上の線: 45度回転させ、中央に寄せる */
+.menu-toggle.is-active .line:nth-child(1) {
+  transform: translateY(9.5px) rotate(45deg);
+}
+
+/* 2. 中央の線: 非表示にする */
+.menu-toggle.is-active .line:nth-child(2) {
+  opacity: 0;
+}
+
+/* 3. 下の線: -45度回転させ、中央に寄せる */
+.menu-toggle.is-active .line:nth-child(3) {
+  transform: translateY(-9.5px) rotate(-45deg);
+}
+
+/* --- デフォルト（1200px未満のモバイル/タブレット表示） --- */
+
+/* 1200px未満では、ナビリストを非表示にし、ハンバーガーアイコンを表示 */
+@media (max-width: 1199px) {
+  /* ナビゲーションリストは、初期状態では非表示 */
+  .nav {
+    display: none; /* 初期は非表示 */
+  }
+
+  /* モバイルメニューが開いたとき (JavaScriptでこのクラスを付与) */
+  .nav.is-open {
+    display: block;
+    position: fixed; /* 画面に対して固定 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 背景を少し暗くしてオーバーレイ感を出す */
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 5;
+
+    /* ナビリスト（<ul>）を中央に配置するためのFlexbox設定 */
+    display: flex;
+    align-items: center; /* 垂直方向中央 */
+    justify-content: center; /* 水平方向中央 */
+  }
+
+  .nav a {
+    /* テキストカラーを白に変更 */
+    color: #fff;
+    font-size: 1.3em; /* フォントサイズを大きくして視認性アップ */
+    padding: 15px 30px;
+    /* 下線色も白に近い色に調整 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0; /* 初期状態: 幅をゼロにして非表示 */
+    height: 2px;
+    background-color: #fff; /* ボーダーの色 */
+    transition: width 0.3s ease-out; /* 幅のアニメーションを設定 */
+  }
+
+  .nav-link:hover {
+    color: #fff;
+  }
+
+  .dropdown-menu a {
+    color: var(--text-color);
+  }
+
+  .nav-list {
+    display: flex;
+    /* flex-direction: column; */
+    list-style: none;
+    gap: 30px;
+  }
+
+  /* ハンバーガーアイコンを表示 */
+  .menu-toggle {
+    display: block;
+  }
+  .menu-toggle.is-active .line {
+    background-color: #fff;
+  }
+
+  .info-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 15px 0;
+  }
+}
+
+/* --- 1200px以上 (PC表示) --- */
+
+/* 1200px以上では、ナビリストを表示し、ハンバーガーアイコンを非表示 */
+@media (min-width: 1200px) {
+  /* PCではリストは常時表示 */
+  .nav {
+    display: block !important; /* JavaScriptでis-openが付与されても常に表示 */
+  }
+
+  /* PCではハンバーガーアイコンを非表示 */
+  .menu-toggle {
+    display: none;
+  }
+}
+
 /* Hero Section */
 .hero {
   /* background: linear-gradient(135deg, #3d79b6 0%, #115eac 100%); */
   padding: 80px 100px;
   text-align: left;
+}
+
+/* 600px未満では、ナビリストを非表示にし、ハンバーガーアイコンを表示 */
+@media (max-width: 599px) {
+  .hero {
+    padding: 80px 20px;
+  }
 }
 
 .hero-title {
@@ -204,7 +344,8 @@ body {
 
 .mission-content {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row-reverse;
+  justify-content: center;
   align-items: center;
   padding: 15px 0;
 }
@@ -237,7 +378,7 @@ body {
 .mission-message {
   position: relative;
   background-color: #ffffff;
-  padding: 30px;
+  padding: 20px;
   overflow: hidden;
   z-index: 1;
   text-align: center;
@@ -314,6 +455,15 @@ body {
   height: 500px;
   position: relative;
   overflow: hidden;
+  border-radius: 30px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* わずかな浮遊感を出す影 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mission-image:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
 }
 
 /* スライドショーのスタイル設定 */
@@ -348,6 +498,48 @@ body {
   filter: blur(20px);
   /* 透明になる */
   opacity: 0;
+}
+
+/* 1200px未満では、ナビリストを非表示にし、ハンバーガーアイコンを表示 */
+@media (max-width: 1199px) {
+  .mission {
+    padding: 20px 0;
+    height: fit-content;
+  }
+
+  /* コンテンツを縦並びに変更 */
+  .mission-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+  }
+
+  .mission-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  .mission-introduction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 550px;
+    min-width: 410px;
+  }
+
+  .mission-image {
+    width: 100%;
+    min-width: 450px;
+  }
 }
 
 /* Strengths Section */
@@ -457,10 +649,17 @@ body {
   color: var(--text-color);
 }
 
-.info-content {
+/* .info-content {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  gap: 20px;
+  padding: 15px 0;
+} */
+
+.info-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   gap: 20px;
   padding: 15px 0;
 }
@@ -785,7 +984,7 @@ body {
   border: 2px solid #007bff;
 }
 
-.lightbox-trigger {
+.lightbox-trigger.underline-link {
   /* デフォルトのテキストデコレーション（下線）を削除 */
   text-decoration: none;
   color: var(--text-color);
@@ -796,7 +995,7 @@ body {
   position: relative;
 }
 
-.lightbox-trigger::after {
+.lightbox-trigger.underline-link::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -807,11 +1006,11 @@ body {
   transition: width 0.3s ease-out; /* 幅のアニメーションを設定 */
 }
 
-.lightbox-trigger:hover::after {
+.lightbox-trigger.underline-link:hover::after {
   width: 100%; /* ホバー時: 幅を100%にして全幅に伸ばす */
 }
 
-.lightbox-trigger:hover {
+.lightbox-trigger.underline-link:hover {
   color: var(--secondary-color);
 }
 
@@ -829,6 +1028,11 @@ body {
   /* ライトボックス自体のフェードイン */
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+}
+
+/* 半透明の背景 */
+.lightbox.human-image {
+  background-color: var(--ivory-color);
 }
 
 .lightbox.active {
@@ -865,6 +1069,12 @@ body {
   /* 下の角を丸く */
   border-bottom-left-radius: 10px; /* 左下 */
   border-bottom-right-radius: 10px; /* 右下 */
+}
+
+/* 💡 コメント・ページ番号エリアのスタイル（文字色と背景色を変更） */
+.lightbox-caption.human-image {
+  color: var(--primary-color);
+  background-color: var(--ivory-color-strong);
 }
 
 #caption-text {
@@ -930,6 +1140,16 @@ body {
   cursor: pointer;
 }
 
+/* ❌ 閉じるボタン（文字色変更） */
+.close-btn.human-image {
+  color: var(--primary-color);
+}
+
+.close-btn.human-image:hover,
+.close-btn.human-image:focus {
+  color: var(--primary-color-hover);
+}
+
 /* ◀️ ▶️ カルーセルボタン */
 .prev-btn,
 .next-btn {
@@ -972,10 +1192,17 @@ body {
   text-align: center;
 }
 
-.ohaka-container {
+/* .ohaka-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 40px;
+  padding: 15px 0;
+} */
+
+.ohaka-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 40px;
   padding: 15px 0;
 }
@@ -1210,13 +1437,6 @@ body {
   font-size: 24px;
 }
 
-/* 下部の比較テキストエリア */
-.footnote-area {
-  text-align: center;
-  margin-top: 30px;
-  padding: 10px;
-}
-
 .summary-text {
   font-size: 18px;
   font-weight: bold;
@@ -1240,12 +1460,11 @@ body {
   margin-left: 5px;
 }
 
-/*
- * 5. フッターエリアのスタイル
- */
+/* 下部の比較テキストエリア */
 .footnote-area {
-  margin-top: 20px; /* 必要に応じて調整 */
   text-align: center;
+  margin-top: 20px;
+  padding: 10px;
 }
 
 /*
@@ -1297,6 +1516,10 @@ body {
 
   /* 斜めに傾けてダイナミックに */
   transform: rotate(-5deg);
+}
+
+.emphasis-text.display-toggle {
+  display: none; /* 初期状態では非表示 */
 }
 
 /* 金額「20万円」を特に強調 */
@@ -1364,4 +1587,26 @@ body {
   border-right: 2px solid #ccc;
   border-bottom: 2px solid #ccc;
   z-index: -1; /* 本体より背面に配置 (不要な場合が多い) */
+}
+
+/* 1200px未満では、ナビリストを非表示にし、ハンバーガーアイコンを表示 */
+@media (max-width: 1199px) {
+  /* 下部の比較テキストエリア */
+  .footnote-area {
+    width: 100%;
+  }
+}
+
+/* 600px未満では、ナビリストを非表示にし、ハンバーガーアイコンを表示 */
+@media (max-width: 599px) {
+  /*
+   * 「その差額はなんと20万円！」のテキスト（破裂する円のスタイル）
+   */
+  .emphasis-text {
+    display: none; /* スマホでは非表示 */
+  }
+
+  .emphasis-text.display-toggle {
+    display: block; /* スマホでは表示 */
+  }
 }

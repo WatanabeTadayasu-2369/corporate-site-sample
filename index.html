@@ -38,7 +38,7 @@
               <h2 class="text-top">墓碑専門</h2>
             </div>
           </div>
-          <nav class="nav">
+          <nav class="nav" id="main-nav">
             <ul class="nav-list">
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link">事業内容</a>
@@ -64,6 +64,11 @@
               </li>
             </ul>
           </nav>
+          <button id="menu-toggle" class="menu-toggle">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+          </button>
         </div>
       </div>
     </header>
@@ -139,12 +144,8 @@
 
       <!-- Mission Section -->
       <section class="mission" id="mission">
-        <div class="container">
+        <div class="container mission-container">
           <div class="mission-content">
-            <div class="mission-image" id="slideshow-bg">
-              <div class="slideshow-layer active-layer"></div>
-              <div class="slideshow-layer next-layer"></div>
-            </div>
             <div class="mission-message">
               <!-- <h3 class="section-title">Our Mission</h3> -->
               <h4 class="mission-subtitle">墓碑専門</h4>
@@ -172,6 +173,16 @@
                   </p>
                 </div>
               </div>
+              <!-- <div class="mission-card"></div> -->
+            </div>
+            <div
+              class="mission-image lightbox-trigger"
+              id="slideshow-bg"
+              data-category="E"
+              data-index-in-category="0"
+            >
+              <div class="slideshow-layer active-layer"></div>
+              <div class="slideshow-layer next-layer"></div>
             </div>
           </div>
         </div>
@@ -258,7 +269,7 @@
                 <div class="info-text">
                   <a
                     href="#"
-                    class="lightbox-trigger"
+                    class="lightbox-trigger underline-link"
                     data-category="A"
                     data-index-in-category="0"
                   >
@@ -268,7 +279,7 @@
                 <div class="info-text">
                   <a
                     href="#"
-                    class="lightbox-trigger"
+                    class="lightbox-trigger underline-link"
                     data-category="A"
                     data-index-in-category="1"
                   >
@@ -278,7 +289,7 @@
                 <div class="info-text">
                   <a
                     href="#"
-                    class="lightbox-trigger"
+                    class="lightbox-trigger underline-link"
                     data-category="A"
                     data-index-in-category="2"
                   >
@@ -293,7 +304,7 @@
                 <div class="info-text">
                   <a
                     href="#"
-                    class="lightbox-trigger"
+                    class="lightbox-trigger underline-link"
                     data-category="B"
                     data-index-in-category="0"
                   >
@@ -303,7 +314,7 @@
                 <div class="info-text">
                   <a
                     href="#"
-                    class="lightbox-trigger"
+                    class="lightbox-trigger underline-link"
                     data-category="B"
                     data-index-in-category="1"
                   >
@@ -313,7 +324,7 @@
                 <div class="info-text">
                   <a
                     href="#"
-                    class="lightbox-trigger"
+                    class="lightbox-trigger underline-link"
                     data-category="B"
                     data-index-in-category="2"
                   >
@@ -328,7 +339,7 @@
                 <div class="info-text">
                   <a
                     href="#"
-                    class="lightbox-trigger"
+                    class="lightbox-trigger underline-link"
                     data-category="D"
                     data-index-in-category="0"
                   >
@@ -338,7 +349,7 @@
                 <div class="info-text">
                   <a
                     href="#"
-                    class="lightbox-trigger"
+                    class="lightbox-trigger underline-link"
                     data-category="D"
                     data-index-in-category="1"
                   >
@@ -348,7 +359,7 @@
                 <div class="info-text">
                   <a
                     href="#"
-                    class="lightbox-trigger"
+                    class="lightbox-trigger underline-link"
                     data-category="D"
                     data-index-in-category="2"
                   >
@@ -428,6 +439,9 @@
                 <p class="emphasis-text">
                   その差額はなんと<span>20万円</span>！
                 </p>
+                <p class="emphasis-text display-toggle">
+                  その差額はなんと<br /><span>20万円</span>！
+                </p>
               </div>
             </div>
           </div>
@@ -467,7 +481,7 @@
               <div class="table-row">
                 <div class="col-label">その他諸経費📖</div>
                 <div class="col-buy data-white">8.0 万円</div>
-                <div class="col-rent data-green">6.8 円</div>
+                <div class="col-rent data-green">6.8 万円</div>
               </div>
               <div class="table-row total-row">
                 <div class="col-label">経費合計💴</div>

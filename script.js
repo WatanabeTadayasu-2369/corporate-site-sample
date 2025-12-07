@@ -16,11 +16,18 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", () => {
   // スクロールさせたいリンク要素すべてを取得
   const scrollLinks = document.querySelectorAll(".scroll-link");
+  const menuToggle = document.getElementById("menu-toggle");
+  const mainNav = document.getElementById("main-nav");
 
   scrollLinks.forEach((link) => {
     link.addEventListener("click", function (e) {
       // リンクのデフォルト動作（瞬時のジャンプ）をキャンセル
       e.preventDefault();
+
+      // ナビリストから 'is-open' クラスを削除して、PC表示（display: block;）を優先させる
+      mainNav.classList.remove("is-open");
+      // 必要であれば、アイコンの見た目を「X」などに変えるためのクラスをトグルしても良い
+      menuToggle.classList.toggle("is-active");
 
       // リンクの href 属性からターゲットの ID を取得
       const targetId = this.getAttribute("href");
@@ -56,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", () => {
     // 画面の高さの約1/3を計算
     const oneThirdOfScreen = document.body.scrollHeight / 4;
-    console.log("oneThirdOfScreen: " + oneThirdOfScreen);
+    // console.log("oneThirdOfScreen: " + oneThirdOfScreen);
     // 現在のスクロール位置が、画面の高さの約1/3を超えたらボタンを表示
     if (
       document.body.scrollTop > oneThirdOfScreen ||
@@ -84,6 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   // 1. 画像URLのリスト
   const images = [
+    'url("img/e-1.jpg")',
+    'url("img/e-3.jpg")',
+    'url("img/e-9.jpg")',
+    'url("img/e-17.jpg")',
+    'url("img/e-18.jpg")',
     'url("img/sky.png")',
     'url("img/kkk.png")',
     'url("img/mmm.png")',
@@ -139,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const lightboxImageWrapper = document.querySelector(
     ".lightbox-image-wrapper"
   );
+  const lightboxCaption = document.querySelector(".lightbox-caption");
   const closeBtn = document.querySelector(".close-btn");
   const prevBtn = document.querySelector(".prev-btn");
   const nextBtn = document.querySelector(".next-btn");
@@ -204,8 +217,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // { src: "img/c-1.jpg", alt: "C-1", caption: "" },
       // { src: "img/c-2.jpg", alt: "C-2", caption: "" },
       // ... 他のCカテゴリ画像
-      // { src: "img/e-1.jpg", alt: "E-1", caption: "" },
-      // ... 他のEカテゴリ画像
+      // { src: "img/k-1.jpg", alt: "K-1", caption: "" },
+      // ... 他のKカテゴリ画像
     ],
     D: [
       // { src: "img/d-1.jpg", alt: "D-1", caption: "" },
@@ -219,6 +232,27 @@ document.addEventListener("DOMContentLoaded", () => {
       { src: "img/d-6.jpg", alt: "D-6", caption: "" },
       { src: "img/d-2.jpg", alt: "D-2", caption: "" },
       // ... 他のDカテゴリ画像
+    ],
+    E: [
+      { src: "img/e-1.jpg", alt: "E-1", caption: "" },
+      { src: "img/e-2.jpg", alt: "E-2", caption: "" },
+      { src: "img/e-3.jpg", alt: "E-3", caption: "" },
+      { src: "img/e-4.jpg", alt: "E-4", caption: "" },
+      { src: "img/e-5.jpg", alt: "E-5", caption: "" },
+      { src: "img/e-6.jpg", alt: "E-6", caption: "" },
+      { src: "img/e-7.jpg", alt: "E-7", caption: "" },
+      { src: "img/e-8.jpg", alt: "E-8", caption: "" },
+      { src: "img/e-9.jpg", alt: "E-9", caption: "" },
+      { src: "img/e-10.jpg", alt: "E-10", caption: "" },
+      { src: "img/e-11.jpg", alt: "E-11", caption: "" },
+      { src: "img/e-12.jpg", alt: "E-12", caption: "" },
+      { src: "img/e-14.jpg", alt: "E-14", caption: "雨の日も..." },
+      { src: "img/e-13.jpg", alt: "E-13", caption: "晴れの日も..." },
+      { src: "img/e-15.jpg", alt: "E-15", caption: "" },
+      { src: "img/e-16.jpg", alt: "E-16", caption: "" },
+      { src: "img/e-17.jpg", alt: "E-17", caption: "" },
+      { src: "img/e-18.jpg", alt: "E-18", caption: "" },
+      // ... 他のEカテゴリ画像
     ],
   };
 
@@ -285,6 +319,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // アニメーションが完了するのを待ってからライトボックス全体を閉じる（フェードアウト）
     setTimeout(() => {
       lightbox.classList.remove("active");
+      lightbox.classList.remove("human-image");
+      lightboxCaption.classList.remove("human-image");
+      closeBtn.classList.remove("human-image");
       // 閉じた後、状態をリセット
       currentCategory = null;
       currentCategoryImages = [];
@@ -316,6 +353,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // ライトボックスを開く (activeクラス追加)
       lightbox.classList.add("active");
+      if (currentCategory === "E") {
+        lightbox.classList.add("human-image"); // 💡 背景色変更クラス追加
+        lightboxCaption.classList.add("human-image");
+        closeBtn.classList.add("human-image");
+      }
 
       // 最初の画像を表示
       showImage(index, true);
@@ -346,4 +388,34 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // 要素を取得
+  const menuToggle = document.getElementById("menu-toggle");
+  const mainNav = document.getElementById("main-nav");
+
+  // ハンバーガーアイコンがクリックされた時の処理
+  menuToggle.addEventListener("click", function () {
+    // ナビゲーションリストに 'is-open' クラスを付け外しする
+    // CSSの .nav.is-open のスタイルが適用され、表示が切り替わる
+    mainNav.classList.toggle("is-open");
+
+    // 必要であれば、アイコンの見た目を「X」などに変えるためのクラスをトグルしても良い
+    menuToggle.classList.toggle("is-active");
+  });
+
+  // 画面サイズが変更された時の処理（リサイズ時の表示制御）
+  window.addEventListener("resize", function () {
+    // 1200px以上のとき
+    if (window.innerWidth >= 1200) {
+      // ナビリストから 'is-open' クラスを削除して、PC表示（display: block;）を優先させる
+      mainNav.classList.remove("is-open");
+    }
+  });
+
+  // 初期ロード時にも一度実行
+  if (window.innerWidth >= 1200) {
+    mainNav.classList.remove("is-open");
+  }
 });
