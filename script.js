@@ -248,6 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { src: "img/e-12.jpg", alt: "E-12", caption: "" },
       { src: "img/e-14.jpg", alt: "E-14", caption: "雨の日も..." },
       { src: "img/e-13.jpg", alt: "E-13", caption: "晴れの日も..." },
+      { src: "img/e-19.jpg", alt: "E-19", caption: "雪の日も..." },
       { src: "img/e-15.jpg", alt: "E-15", caption: "" },
       { src: "img/e-16.jpg", alt: "E-16", caption: "" },
       { src: "img/e-17.jpg", alt: "E-17", caption: "" },
