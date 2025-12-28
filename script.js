@@ -96,6 +96,17 @@ document.addEventListener("DOMContentLoaded", () => {
     'url("img/e-9.jpg")',
     'url("img/e-17.jpg")',
     'url("img/e-18.jpg")',
+    'url("img/e-20.jpg")',
+    'url("img/e-22.jpg")',
+    'url("img/e-23.jpg")',
+    'url("img/e-24.jpg")',
+    'url("img/e-25.jpg")',
+    'url("img/e-26.jpg")',
+    'url("img/e-27.jpg")',
+    'url("img/e-28.jpg")',
+    'url("img/e-29.jpg")',
+    'url("img/e-21.jpg")',
+    'url("img/e-30.jpg")',
     'url("img/sky.png")',
     'url("img/kkk.png")',
     'url("img/mmm.png")',
@@ -253,6 +264,17 @@ document.addEventListener("DOMContentLoaded", () => {
       { src: "img/e-16.jpg", alt: "E-16", caption: "" },
       { src: "img/e-17.jpg", alt: "E-17", caption: "" },
       { src: "img/e-18.jpg", alt: "E-18", caption: "" },
+      // { src: "img/e-20.jpg", alt: "E-20", caption: "" },
+      { src: "img/e-22.jpg", alt: "E-22", caption: "" },
+      { src: "img/e-23.jpg", alt: "E-23", caption: "" },
+      { src: "img/e-24.jpg", alt: "E-24", caption: "" },
+      { src: "img/e-25.jpg", alt: "E-25", caption: "約50年前...（１）" },
+      { src: "img/e-26.jpg", alt: "E-26", caption: "約50年前...（２）" },
+      { src: "img/e-27.jpg", alt: "E-27", caption: "約50年前...（３）" },
+      { src: "img/e-28.jpg", alt: "E-28", caption: "約50年前...（４）" },
+      { src: "img/e-29.jpg", alt: "E-29", caption: "約50年前...（５）" },
+      { src: "img/e-21.jpg", alt: "E-21", caption: "現在74歳" },
+      { src: "img/e-30.jpg", alt: "E-30", caption: "" },
       // ... 他のEカテゴリ画像
     ],
   };
@@ -389,6 +411,41 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  // タッチ開始時の位置を記録
+  lightboxImageWrapper.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    },
+    { passive: true }
+  );
+
+  // タッチ終了時の位置を比較してスワイプ判定
+  lightboxImageWrapper.addEventListener(
+    "touchend",
+    (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    },
+    { passive: true }
+  );
+
+  function handleSwipe() {
+    const swipeDistance = touchEndX - touchStartX;
+    const threshold = 50; // スワイプと判定する最小距離（ピクセル）
+
+    if (swipeDistance > threshold) {
+      // 右へスワイプ ＝ 前の画像へ
+      prevImage();
+    } else if (swipeDistance < -threshold) {
+      // 左へスワイプ ＝ 次の画像へ
+      nextImage();
+    }
+  }
 });
 
 document.addEventListener("DOMContentLoaded", function () {

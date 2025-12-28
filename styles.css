@@ -380,6 +380,7 @@ body {
   color: #333;
   width: 600px;
   height: 500px;
+  max-width: 100%; /* 親要素の幅を超えないようにする */
 }
 
 .mission-introduction {
@@ -448,6 +449,7 @@ body {
 .mission-image {
   width: 500px;
   height: 500px;
+  max-width: 100%; /* 親要素の幅を超えないようにする */
   position: relative;
   overflow: hidden;
   border-radius: 30px;
@@ -526,7 +528,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
     max-width: 550px;
     min-width: 410px;
   }
@@ -1098,7 +1099,7 @@ body {
 }
 
 #lightbox-image {
-  width: auto;
+  width: 100%;
   height: auto;
   max-width: 100vw;
   max-height: 80vh;
@@ -1201,6 +1202,7 @@ body {
   /* 画像のサイズに合わせて調整してください */
   width: 500px;
   height: 500px;
+  max-width: 100%; /* 親要素の幅を超えないようにする */
   position: relative;
   display: inline-block; /* コンテナを内容物のサイズに合わせる */
   overflow: hidden; /* 必要に応じて */
@@ -1213,6 +1215,7 @@ body {
 .ohaka-illust-image {
   width: 450px;
   height: 550px;
+  max-width: 100%; /* 親要素の幅を超えないようにする */
   margin: 10px;
   object-fit: cover;
 }
