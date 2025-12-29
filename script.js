@@ -92,27 +92,81 @@ document.addEventListener("DOMContentLoaded", () => {
   // 1. 画像URLのリスト
   const images = [
     'url("img/e-1.jpg")',
-    'url("img/e-3.jpg")',
-    'url("img/e-9.jpg")',
+    'url("img/e-8.jpg")',
+    'url("img/e-10.jpg")',
+    "video/20251229-video.mp4",
+    'url("img/e-16.jpg")',
     'url("img/e-17.jpg")',
     'url("img/e-18.jpg")',
-    'url("img/e-20.jpg")',
     'url("img/e-22.jpg")',
     'url("img/e-23.jpg")',
     'url("img/e-24.jpg")',
     'url("img/e-25.jpg")',
-    'url("img/e-26.jpg")',
-    'url("img/e-27.jpg")',
     'url("img/e-28.jpg")',
     'url("img/e-29.jpg")',
     'url("img/e-21.jpg")',
     'url("img/e-30.jpg")',
+    'url("img/e-30.jpg")',
+    'url("img/e-31.jpg")',
+    'url("img/e-32.jpg")',
+    'url("img/e-33.jpg")',
+    'url("img/e-34.jpg")',
+    'url("img/e-35.jpg")',
+    'url("img/e-36.jpg")',
+    'url("img/e-37.jpg")',
+    'url("img/e-38.jpg")',
     'url("img/sky.png")',
     'url("img/kkk.png")',
     'url("img/mmm.png")',
     'url("img/vvv.png")',
     'url("img/yyy.png")',
   ];
+
+  const lightboxImageWrapper = document.querySelector(
+    ".lightbox-image-wrapper"
+  );
+
+  const slideshowElement = document.getElementById("slideshow-bg");
+
+  function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  // メディアをレイヤーにセットする関数
+  function setMedia(layer, path) {
+    // すでにある動画をクリア
+    layer.innerHTML = "";
+
+    if (path.endsWith(".mp4")) {
+      // 動画の場合：video要素を作成
+      const video = document.createElement("video");
+      video.src = path;
+      video.autoplay = true;
+      if (
+        lightboxImageWrapper.classList.contains("show") ||
+        isElementInViewport(slideshowElement)
+      ) {
+        video.muted = true;
+      }
+      video.loop = true;
+      video.playsInline = true;
+      video.style.width = "100%";
+      video.style.height = "100%";
+      video.style.objectFit = "cover"; // 枠いっぱいに表示
+      layer.style.backgroundImage = "none";
+      layer.appendChild(video);
+    } else {
+      // 画像の場合：背景画像として設定
+      layer.style.backgroundImage = `${path}`;
+    }
+  }
 
   const targetElement = document.getElementById("slideshow-bg");
   let activeLayer = targetElement.querySelector(".active-layer");
@@ -128,8 +182,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function startSlideshow() {
     setInterval(() => {
-      // 1. nextLayer に次の画像をロード
-      nextLayer.style.backgroundImage = images[currentIndex];
+      // // 1. nextLayer に次の画像をロード
+      // nextLayer.style.backgroundImage = images[currentIndex];
+      // 1. 次のメディアを準備
+      setMedia(nextLayer, images[currentIndex]);
 
       // 2. 現在の activeLayer をぼかしながらフェードアウトさせる
       activeLayer.classList.add("blur-out-layer");
@@ -144,6 +200,8 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         // 古い activeLayer のクラスをリセット
         activeLayer.classList.remove("active-layer", "blur-out-layer");
+        // 古いレイヤーの中身（動画など）を空にする
+        activeLayer.innerHTML = "";
 
         // activeLayer と nextLayer の参照を入れ替える
         const temp = activeLayer;
@@ -175,106 +233,84 @@ document.addEventListener("DOMContentLoaded", () => {
   // 💡 全画像データ: コメント (caption) を追加
   const allImageData = {
     A: [
-      // { src: "img/a-2.jpg", alt: "A-2", caption: "" },
-      // { src: "img/a-3.jpg", alt: "A-3", caption: "" },
-      // { src: "img/a-4.jpg", alt: "A-4", caption: "" },
-      // { src: "img/a-5.jpg", alt: "A-5", caption: "" },
       {
-        src: "img/a-6.jpg",
-        alt: "A-6",
+        src: "img/a-1.jpg",
+        alt: "A-1",
         caption: "他施工例も掲載しております。ご確認ください。",
       },
+      { src: "img/a-2.jpg", alt: "A-2", caption: "" },
+      { src: "img/a-3.jpg", alt: "A-3", caption: "" },
+      { src: "img/a-4.jpg", alt: "A-4", caption: "" },
+      { src: "img/a-5.jpg", alt: "A-5", caption: "" },
+      { src: "img/a-6.jpg", alt: "A-6", caption: "" },
       { src: "img/a-8.jpg", alt: "A-8", caption: "" },
-      // { src: "img/a-7.jpg", alt: "A-7", caption: "" },
-      // { src: "img/a-9.jpg", alt: "A-9", caption: "" },
-      // { src: "img/a-10.jpg", alt: "A-10", caption: "" },
-      // { src: "img/a-11.jpg", alt: "A-11", caption: "" },
       { src: "img/a-21.jpg", alt: "A-21", caption: "" },
       { src: "img/a-22.jpg", alt: "A-22", caption: "" },
       { src: "img/a-23.jpg", alt: "A-23", caption: "" },
       { src: "img/a-24.jpg", alt: "A-24", caption: "" },
-      { src: "img/a-25.jpg", alt: "A-25", caption: "" },
-      { src: "img/a-1.jpg", alt: "A-1", caption: "" },
+      // { src: "img/a-25.jpg", alt: "A-25", caption: "" },
+      { src: "img/a-30.jpg", alt: "A-30", caption: "" },
+      { src: "img/a-31.jpg", alt: "A-31", caption: "" },
       // ... 他のAカテゴリ画像
     ],
     B: [
-      // { src: "img/b-1.jpg", alt: "B-1", caption: "" },
-      {
-        src: "img/b-3.jpg",
-        alt: "B-3",
-        caption: "他施工例も掲載しております。ご確認ください。",
-      },
-      // { src: "img/b-4.jpg", alt: "B-4", caption: "" },
-      { src: "img/b-5.jpg", alt: "B-5", caption: "" },
-      // { src: "img/b-6.jpg", alt: "B-6", caption: "" },
-      { src: "img/b-7.jpg", alt: "B-7", caption: "" },
       {
         src: "img/b-2.jpg",
         alt: "B-2",
-        caption: "",
+        caption: "他施工例も掲載しております。ご確認ください。",
       },
-      // { src: "img/b-8.jpg", alt: "B-8", caption: "" },
-      // { src: "img/b-9.jpg", alt: "B-9", caption: "" },
-      // { src: "img/b-10.jpg", alt: "B-10", caption: "" },
-      // { src: "img/b-11.jpg", alt: "B-11", caption: "" },
-      // { src: "img/b-12.jpg", alt: "B-12", caption: "" },
-      // { src: "img/b-13.jpg", alt: "B-13", caption: "" },
-      // { src: "img/b-14.jpg", alt: "B-14", caption: "" },
-      // { src: "img/b-15.jpg", alt: "B-15", caption: "" },
-      // { src: "img/b-16.jpg", alt: "B-16", caption: "" },
-      // { src: "img/b-17.jpg", alt: "B-17", caption: "" },
-      // { src: "img/b-18.jpg", alt: "B-18", caption: "" },
+      { src: "img/b-3.jpg", alt: "B-3", caption: "" },
+      { src: "img/b-5.jpg", alt: "B-5", caption: "" },
+      { src: "img/b-6.jpg", alt: "B-6", caption: "" },
+      { src: "img/b-7.jpg", alt: "B-7", caption: "" },
+      { src: "img/b-10.jpg", alt: "B-10", caption: "" },
+      { src: "img/b-11.jpg", alt: "B-11", caption: "" },
+      { src: "img/b-12.jpg", alt: "B-12", caption: "" },
+      { src: "img/b-13.jpg", alt: "B-13", caption: "" },
+      { src: "img/b-14.jpg", alt: "B-14", caption: "" },
+      { src: "img/b-19.jpg", alt: "B-19", caption: "" },
+      { src: "img/b-20.jpg", alt: "B-20", caption: "" },
       // ... 他のBカテゴリ画像
-      // { src: "img/c-1.jpg", alt: "C-1", caption: "" },
-      // { src: "img/c-2.jpg", alt: "C-2", caption: "" },
-      // ... 他のCカテゴリ画像
-      // { src: "img/k-1.jpg", alt: "K-1", caption: "" },
-      // ... 他のKカテゴリ画像
     ],
     D: [
-      // { src: "img/d-1.jpg", alt: "D-1", caption: "" },
       {
         src: "img/d-3.jpg",
         alt: "D-3",
         caption: "他施工例も掲載しております。ご確認ください。",
       },
       { src: "img/d-4.jpg", alt: "D-4", caption: "" },
-      // { src: "img/d-5.jpg", alt: "D-5", caption: "" },
       { src: "img/d-6.jpg", alt: "D-6", caption: "" },
       { src: "img/d-2.jpg", alt: "D-2", caption: "" },
+      { src: "img/a-25.jpg", alt: "A-25", caption: "" },
+      { src: "img/d-7.jpg", alt: "D-7", caption: "" },
       // ... 他のDカテゴリ画像
     ],
     E: [
       { src: "img/e-1.jpg", alt: "E-1", caption: "" },
-      { src: "img/e-2.jpg", alt: "E-2", caption: "" },
-      { src: "img/e-3.jpg", alt: "E-3", caption: "" },
-      { src: "img/e-4.jpg", alt: "E-4", caption: "" },
-      { src: "img/e-5.jpg", alt: "E-5", caption: "" },
-      { src: "img/e-6.jpg", alt: "E-6", caption: "" },
-      { src: "img/e-7.jpg", alt: "E-7", caption: "" },
       { src: "img/e-8.jpg", alt: "E-8", caption: "" },
-      { src: "img/e-9.jpg", alt: "E-9", caption: "" },
       { src: "img/e-10.jpg", alt: "E-10", caption: "" },
-      { src: "img/e-11.jpg", alt: "E-11", caption: "" },
-      { src: "img/e-12.jpg", alt: "E-12", caption: "" },
       { src: "img/e-14.jpg", alt: "E-14", caption: "雨の日も..." },
       { src: "img/e-13.jpg", alt: "E-13", caption: "晴れの日も..." },
       { src: "img/e-19.jpg", alt: "E-19", caption: "雪の日も..." },
-      { src: "img/e-15.jpg", alt: "E-15", caption: "" },
       { src: "img/e-16.jpg", alt: "E-16", caption: "" },
       { src: "img/e-17.jpg", alt: "E-17", caption: "" },
       { src: "img/e-18.jpg", alt: "E-18", caption: "" },
-      // { src: "img/e-20.jpg", alt: "E-20", caption: "" },
       { src: "img/e-22.jpg", alt: "E-22", caption: "" },
       { src: "img/e-23.jpg", alt: "E-23", caption: "" },
       { src: "img/e-24.jpg", alt: "E-24", caption: "" },
-      { src: "img/e-25.jpg", alt: "E-25", caption: "約50年前...（１）" },
-      { src: "img/e-26.jpg", alt: "E-26", caption: "約50年前...（２）" },
-      { src: "img/e-27.jpg", alt: "E-27", caption: "約50年前...（３）" },
-      { src: "img/e-28.jpg", alt: "E-28", caption: "約50年前...（４）" },
-      { src: "img/e-29.jpg", alt: "E-29", caption: "約50年前...（５）" },
+      { src: "img/e-25.jpg", alt: "E-25", caption: "50数年前...（１）" },
+      { src: "img/e-28.jpg", alt: "E-28", caption: "50数年前...（２）" },
+      { src: "img/e-29.jpg", alt: "E-29", caption: "50数年前...（３）" },
       { src: "img/e-21.jpg", alt: "E-21", caption: "現在74歳" },
       { src: "img/e-30.jpg", alt: "E-30", caption: "" },
+      { src: "img/e-31.jpg", alt: "E-31", caption: "" },
+      { src: "img/e-32.jpg", alt: "E-32", caption: "" },
+      { src: "img/e-33.jpg", alt: "E-33", caption: "" },
+      { src: "img/e-34.jpg", alt: "E-34", caption: "" },
+      { src: "img/e-35.jpg", alt: "E-35", caption: "" },
+      { src: "img/e-36.jpg", alt: "E-36", caption: "" },
+      { src: "img/e-37.jpg", alt: "E-37", caption: "" },
+      { src: "img/e-38.jpg", alt: "E-38", caption: "" },
       // ... 他のEカテゴリ画像
     ],
   };
