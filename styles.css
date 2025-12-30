@@ -497,6 +497,66 @@ body {
   opacity: 0;
 }
 
+#slideshow-bg {
+  position: relative;
+  cursor: pointer;
+}
+
+/* オーバーレイの基本スタイル */
+.bgm-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* 画像を見せつつ暗くする */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+/* クリック後に付与する非表示クラス */
+.bgm-overlay.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 再生アイコンのデザイン */
+.play-circle {
+  width: 70px;
+  height: 70px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 10px;
+  transition: transform 0.3s ease;
+}
+
+.play-triangle {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 12px 0 12px 20px;
+  border-color: transparent transparent transparent #ffffff;
+  margin-left: 4px;
+}
+
+.play-text {
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+}
+
+.bgm-overlay:hover .play-circle {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.1);
+}
+
 /* 1200px未満では、ナビリストを非表示にし、ハンバーガーアイコンを表示 */
 @media (max-width: 1199px) {
   .mission {
@@ -519,6 +579,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 520px;
     margin-bottom: 20px;
     padding: 0;
   }
@@ -529,12 +590,21 @@ body {
     justify-content: center;
     align-items: center;
     max-width: 550px;
-    min-width: 410px;
+    min-width: 350px;
+  }
+
+  .human-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
   }
 
   .mission-image {
     width: 100%;
-    min-width: 450px;
+    min-width: 250px;
   }
 }
 
@@ -555,7 +625,7 @@ body {
 
 .strengths-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 40px;
   margin-top: 50px;
 }
@@ -613,7 +683,8 @@ body {
   width: 100%;
   height: 250px;
   object-fit: cover;
-  border-radius: 4px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 /* Information Section */
@@ -1426,29 +1497,6 @@ body {
   font-size: 24px;
 }
 
-.summary-text {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-}
-
-/* summary-text 内の強調したい span タグのスタイル */
-.summary-text span {
-  color: red; /* 濃い赤色で強調 */
-  font-weight: bold; /* さらに目立たせるために太字にする (任意) */
-}
-
-/* 補足の注意書き (画像には含まれていませんが、スペース確保のため) */
-.col-buy.data-white:first-child::before {
-  content: "※一般的な販売価格";
-  font-size: 10px;
-  color: #666;
-  position: absolute;
-  top: 50px;
-  transform: translateX(-50%);
-  margin-left: 5px;
-}
-
 /* 下部の比較テキストエリア */
 .footnote-area {
   text-align: center;
@@ -1597,5 +1645,9 @@ body {
 
   .emphasis-text.display-toggle {
     display: block; /* スマホでは表示 */
+  }
+
+  .ishiyoshi-logo-end {
+    display: none; /* スマホでは表示 */
   }
 }

@@ -54,6 +54,50 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// 1. オーディオ要素を作成（またはHTML上の<audio>を取得）
+// const bgm = new Audio("video/20251229-video.mp4");
+const bgm = new Audio("video/440_BPM180.mp3");
+bgm.loop = true; // ループ再生を有効にする
+
+const overlay = document.getElementById("bgm-overlay");
+const target = document.getElementById("slideshow-bg");
+
+// 1. スクロール監視の準備（一度クリックされた後に有効化するためのフラグをチェック）
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      // オーバーレイが非表示（＝クリック済み）の時だけ動作
+      if (overlay.classList.contains("is-hidden")) {
+        if (entry.isIntersecting) {
+          bgm.play().catch(() => {}); // エラー回避用
+        } else {
+          bgm.pause();
+        }
+      }
+    });
+  },
+  { threshold: 0.1 }
+);
+
+// 監視を開始
+observer.observe(target);
+
+// 2. クリックイベント（トリガー）
+overlay.addEventListener("click", (e) => {
+  e.stopPropagation(); // 他のクリックイベント（Lightbox等）との干渉防止
+
+  // 初回再生
+  bgm
+    .play()
+    .then(() => {
+      // 成功したらオーバーレイを消す
+      overlay.classList.add("is-hidden");
+    })
+    .catch((error) => {
+      console.error("再生に失敗しました:", error);
+    });
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const scrollButton = document.getElementById("scrollToTopBtn");
 
@@ -94,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
     'url("img/e-1.jpg")',
     'url("img/e-8.jpg")',
     'url("img/e-10.jpg")',
-    "video/20251229-video.mp4",
     'url("img/e-16.jpg")',
     'url("img/e-17.jpg")',
     'url("img/e-18.jpg")',
@@ -109,12 +152,16 @@ document.addEventListener("DOMContentLoaded", () => {
     'url("img/e-30.jpg")',
     'url("img/e-31.jpg")',
     'url("img/e-32.jpg")',
-    'url("img/e-33.jpg")',
     'url("img/e-34.jpg")',
     'url("img/e-35.jpg")',
     'url("img/e-36.jpg")',
-    'url("img/e-37.jpg")',
     'url("img/e-38.jpg")',
+    'url("img/e-39.jpg")',
+    'url("img/e-40.jpg")',
+    'url("img/e-41.jpg")',
+    'url("img/e-42.jpg")',
+    'url("img/e-43.jpg")',
+    'url("img/e-44.jpg")',
     'url("img/sky.png")',
     'url("img/kkk.png")',
     'url("img/mmm.png")',
@@ -182,32 +229,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function startSlideshow() {
     setInterval(() => {
-      // // 1. nextLayer に次の画像をロード
-      // nextLayer.style.backgroundImage = images[currentIndex];
-      // 1. 次のメディアを準備
-      setMedia(nextLayer, images[currentIndex]);
+      // オーバーレイが非表示のときだけ切り替えを実行
+      if (overlay.classList.contains("is-hidden")) {
+        // // 1. nextLayer に次の画像をロード
+        // nextLayer.style.backgroundImage = images[currentIndex];
+        // 1. 次のメディアを準備
+        setMedia(nextLayer, images[currentIndex]);
 
-      // 2. 現在の activeLayer をぼかしながらフェードアウトさせる
-      activeLayer.classList.add("blur-out-layer");
+        // 2. 現在の activeLayer をぼかしながらフェードアウトさせる
+        activeLayer.classList.add("blur-out-layer");
 
-      // 3. nextLayer を activeLayer にして、フェードインさせる
-      nextLayer.classList.add("active-layer");
+        // 3. nextLayer を activeLayer にして、フェードインさせる
+        nextLayer.classList.add("active-layer");
 
-      // 4. 次の画像へのインデックスを更新
-      currentIndex = (currentIndex + 1) % images.length;
+        // 4. 次の画像へのインデックスを更新
+        currentIndex = (currentIndex + 1) % images.length;
 
-      // 5. アニメーション完了後 (1.5秒後) にクラスを入れ替えて要素の役割を逆転させる
-      setTimeout(() => {
-        // 古い activeLayer のクラスをリセット
-        activeLayer.classList.remove("active-layer", "blur-out-layer");
-        // 古いレイヤーの中身（動画など）を空にする
-        activeLayer.innerHTML = "";
+        // 5. アニメーション完了後 (1.5秒後) にクラスを入れ替えて要素の役割を逆転させる
+        setTimeout(() => {
+          // 古い activeLayer のクラスをリセット
+          activeLayer.classList.remove("active-layer", "blur-out-layer");
+          // 古いレイヤーの中身（動画など）を空にする
+          activeLayer.innerHTML = "";
 
-        // activeLayer と nextLayer の参照を入れ替える
-        const temp = activeLayer;
-        activeLayer = nextLayer;
-        nextLayer = temp;
-      }, transitionDuration);
+          // activeLayer と nextLayer の参照を入れ替える
+          const temp = activeLayer;
+          activeLayer = nextLayer;
+          nextLayer = temp;
+        }, transitionDuration);
+      }
     }, intervalTime); // 3000ms (3秒) ごとに切り替えを開始
   }
 
@@ -305,12 +355,16 @@ document.addEventListener("DOMContentLoaded", () => {
       { src: "img/e-30.jpg", alt: "E-30", caption: "" },
       { src: "img/e-31.jpg", alt: "E-31", caption: "" },
       { src: "img/e-32.jpg", alt: "E-32", caption: "" },
-      { src: "img/e-33.jpg", alt: "E-33", caption: "" },
       { src: "img/e-34.jpg", alt: "E-34", caption: "" },
       { src: "img/e-35.jpg", alt: "E-35", caption: "" },
       { src: "img/e-36.jpg", alt: "E-36", caption: "" },
-      { src: "img/e-37.jpg", alt: "E-37", caption: "" },
       { src: "img/e-38.jpg", alt: "E-38", caption: "" },
+      { src: "img/e-39.jpg", alt: "E-39", caption: "" },
+      { src: "img/e-40.jpg", alt: "E-40", caption: "" },
+      { src: "img/e-41.jpg", alt: "E-41", caption: "" },
+      { src: "img/e-42.jpg", alt: "E-42", caption: "" },
+      { src: "img/e-43.jpg", alt: "E-43", caption: "" },
+      { src: "img/e-44.jpg", alt: "E-44", caption: "" },
       // ... 他のEカテゴリ画像
     ],
   };
