@@ -156,11 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
     'url("img/e-35.jpg")',
     'url("img/e-36.jpg")',
     'url("img/e-38.jpg")',
-    'url("img/e-39.jpg")',
-    'url("img/e-40.jpg")',
-    'url("img/e-41.jpg")',
-    'url("img/e-42.jpg")',
-    'url("img/e-43.jpg")',
     'url("img/e-44.jpg")',
     'url("img/sky.png")',
     'url("img/kkk.png")',
@@ -333,6 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { src: "img/d-2.jpg", alt: "D-2", caption: "" },
       { src: "img/a-25.jpg", alt: "A-25", caption: "" },
       { src: "img/d-7.jpg", alt: "D-7", caption: "" },
+      { src: "img/d-8.jpg", alt: "D-8", caption: "" },
       // ... 他のDカテゴリ画像
     ],
     E: [
@@ -357,13 +353,12 @@ document.addEventListener("DOMContentLoaded", () => {
       { src: "img/e-32.jpg", alt: "E-32", caption: "" },
       { src: "img/e-34.jpg", alt: "E-34", caption: "" },
       { src: "img/e-35.jpg", alt: "E-35", caption: "" },
-      { src: "img/e-36.jpg", alt: "E-36", caption: "" },
+      {
+        src: "img/e-36.jpg",
+        alt: "E-36",
+        caption: "2025年　秋　新潟県新潟市の田んぼ",
+      },
       { src: "img/e-38.jpg", alt: "E-38", caption: "" },
-      { src: "img/e-39.jpg", alt: "E-39", caption: "" },
-      { src: "img/e-40.jpg", alt: "E-40", caption: "" },
-      { src: "img/e-41.jpg", alt: "E-41", caption: "" },
-      { src: "img/e-42.jpg", alt: "E-42", caption: "" },
-      { src: "img/e-43.jpg", alt: "E-43", caption: "" },
       { src: "img/e-44.jpg", alt: "E-44", caption: "" },
       // ... 他のEカテゴリ画像
     ],

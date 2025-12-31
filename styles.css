@@ -1250,14 +1250,6 @@ body {
   text-align: center;
 }
 
-/* .ohaka-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  padding: 15px 0;
-} */
-
 .ohaka-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1647,7 +1639,56 @@ body {
     display: block; /* スマホでは表示 */
   }
 
+  /* logo image */
+  .main-logo-image {
+    width: 280px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .ishiyoshi-logo-start {
+    display: none; /* スマホでは表示 */
+  }
+
   .ishiyoshi-logo-end {
     display: none; /* スマホでは表示 */
+  }
+
+  /* 施工例 */
+  .info-item {
+    width: 290px;
+    height: 290px;
+  }
+
+  /*
+  * 1. コンテナ設定
+  * 画像と金額タグの重ね合わせの基準となるように relative を指定
+  */
+  .price-container {
+    width: 290px;
+  }
+
+  /* 下部の比較テキストエリア */
+  .compare-content .emphasis-circle-wrapper {
+    width: 90%;
+  }
+
+  .emphasis-text.display-toggle {
+    font-size: 28px;
+  }
+
+  .compare-table {
+    display: grid;
+    /* 4つの列: ラベル, 購入ヘッダー, レンタルヘッダー, 補足 */
+    grid-template-columns: 160px 1.5fr 1.5fr;
+  }
+
+  /* ラベル列 (左側) */
+  .col-label {
+    width: 160px;
+  }
+  /* 左上角は空白 */
+  .col-head {
+    width: 160px;
   }
 }
