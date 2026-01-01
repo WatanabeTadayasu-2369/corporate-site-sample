@@ -344,6 +344,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { src: "img/e-22.jpg", alt: "E-22", caption: "" },
       { src: "img/e-23.jpg", alt: "E-23", caption: "" },
       { src: "img/e-24.jpg", alt: "E-24", caption: "" },
+      { src: "img/e-45.jpg", alt: "E-45", caption: "" },
       { src: "img/e-25.jpg", alt: "E-25", caption: "50数年前...（１）" },
       { src: "img/e-28.jpg", alt: "E-28", caption: "50数年前...（２）" },
       { src: "img/e-29.jpg", alt: "E-29", caption: "50数年前...（３）" },
