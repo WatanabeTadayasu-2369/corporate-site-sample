@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           # エックスサーバーの公開ディレクトリを指定
           # server-dir: https://ishiyoshi-sekizaiten.com/public_html/
-          server-dir: ${{ secrets.FTP_SERVER }}/public_html/
+          server-dir: ${{ secrets.FTP_SERVER }}/ishiyoshi-sekizaiten.com/public_html/
           # 差分だけをアップロード（高速化）
           dangerous-clean-slate: false
 
