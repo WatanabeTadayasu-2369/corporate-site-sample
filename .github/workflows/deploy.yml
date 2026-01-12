@@ -1,0 +1,27 @@
+name: FTP Deploy
+
+on:
+  push:
+    branches:
+      - main  # mainブランチにプッシュされた時に実行
+
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v4
+
+      - name: Sync files to Xserver
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # エックスサーバーの公開ディレクトリを指定
+          server-dir: https://ishiyoshi-sekizaiten.com/public_html/
+          # 差分だけをアップロード（高速化）
+          dangerous-clean-slate: false
+
+      - run: echo "This job's status is ${{ job.status }}."
