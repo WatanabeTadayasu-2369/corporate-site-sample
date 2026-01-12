@@ -196,7 +196,7 @@ body {
 
 /* 1. 上の線: 45度回転させ、中央に寄せる */
 .menu-toggle.is-active .line:nth-child(1) {
-  transform: translateY(9.5px) rotate(45deg);
+  transform: translateY(10px) rotate(45deg);
 }
 
 /* 2. 中央の線: 非表示にする */
@@ -206,7 +206,7 @@ body {
 
 /* 3. 下の線: -45度回転させ、中央に寄せる */
 .menu-toggle.is-active .line:nth-child(3) {
-  transform: translateY(-9.5px) rotate(-45deg);
+  transform: translateY(-10px) rotate(-45deg);
 }
 
 /* --- デフォルト（1200px未満のモバイル/タブレット表示） --- */
@@ -256,8 +256,33 @@ body {
     transition: width 0.3s ease-out; /* 幅のアニメーションを設定 */
   }
 
+  .nav-link:hover::after {
+    width: 100%; /* ホバー時: 幅を100%にして全幅に伸ばす */
+  }
+
   .nav-link:hover {
     color: #fff;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 120%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    min-width: 250px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-190px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-180px);
   }
 
   .dropdown-menu a {
@@ -266,7 +291,7 @@ body {
 
   .nav-list {
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     list-style: none;
     gap: 30px;
   }
