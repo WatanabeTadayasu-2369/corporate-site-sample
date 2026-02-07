@@ -479,7 +479,9 @@ body {
   overflow: hidden;
   border-radius: 30px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* わずかな浮遊感を出す影 */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .mission-image:hover {
@@ -501,7 +503,9 @@ body {
   border-radius: 5%;
 
   /* ★フェードとぼかしの両方にトランジションを設定 */
-  transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
+  transition:
+    opacity 1.5s ease-in-out,
+    filter 1.5s ease-in-out;
   opacity: 0;
   /* 初期はぼかしなし */
   filter: blur(0px);
@@ -539,7 +543,9 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 100;
-  transition: opacity 0.8s ease, visibility 0.8s;
+  transition:
+    opacity 0.8s ease,
+    visibility 0.8s;
 }
 
 /* クリック後に付与する非表示クラス */
@@ -659,7 +665,9 @@ body {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .strength-card:hover {
@@ -1563,7 +1571,8 @@ body {
   white-space: nowrap; /* テキストが途中で改行されないように */
 
   /* 破裂感を出すための擬似要素 */
-  box-shadow: 0 0 0 5px #dc3545,
+  box-shadow:
+    0 0 0 5px #dc3545,
     /* 外側に同色で影 */ 0 0 0 10px rgba(220, 53, 69, 0.5),
     /* 少し薄い赤で外側にもう一層 */ 0 0 0 15px rgba(220, 53, 69, 0.2); /* さらに薄い赤で外側にもう一層 */
   animation: pulse 1.5s infinite alternate; /* 鼓動するようなアニメーション */
@@ -1587,12 +1596,16 @@ body {
 @keyframes pulse {
   0% {
     transform: scale(1) rotate(-5deg);
-    box-shadow: 0 0 0 5px #dc3545, 0 0 0 10px rgba(220, 53, 69, 0.5),
+    box-shadow:
+      0 0 0 5px #dc3545,
+      0 0 0 10px rgba(220, 53, 69, 0.5),
       0 0 0 15px rgba(220, 53, 69, 0.2);
   }
   100% {
     transform: scale(1.05) rotate(-5deg);
-    box-shadow: 0 0 0 5px #dc3545, 0 0 0 12px rgba(220, 53, 69, 0.7),
+    box-shadow:
+      0 0 0 5px #dc3545,
+      0 0 0 12px rgba(220, 53, 69, 0.7),
       0 0 0 20px rgba(220, 53, 69, 0.4);
   }
 }

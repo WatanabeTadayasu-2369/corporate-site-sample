@@ -76,7 +76,7 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.1 }
+  { threshold: 0.1 },
 );
 
 // 監視を開始
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const lightboxImageWrapper = document.querySelector(
-    ".lightbox-image-wrapper"
+    ".lightbox-image-wrapper",
   );
 
   const slideshowElement = document.getElementById("slideshow-bg");
@@ -258,11 +258,103 @@ document.addEventListener("DOMContentLoaded", () => {
   startSlideshow();
 });
 
+// 💡 全画像データ: コメント (caption) を追加
+const allImageData = {
+  A: [
+    {
+      src: "img/a-1.jpg",
+      alt: "A-1",
+      caption: "他施工例も掲載しております。ご確認ください。",
+    },
+    { src: "img/a-2.jpg", alt: "A-2", caption: "" },
+    { src: "img/a-3.jpg", alt: "A-3", caption: "" },
+    { src: "img/a-4.jpg", alt: "A-4", caption: "" },
+    { src: "img/a-5.jpg", alt: "A-5", caption: "" },
+    { src: "img/a-6.jpg", alt: "A-6", caption: "" },
+    { src: "img/a-8.jpg", alt: "A-8", caption: "" },
+    { src: "img/a-21.jpg", alt: "A-21", caption: "" },
+    { src: "img/a-22.jpg", alt: "A-22", caption: "" },
+    { src: "img/a-23.jpg", alt: "A-23", caption: "" },
+    { src: "img/a-24.jpg", alt: "A-24", caption: "" },
+    // { src: "img/a-25.jpg", alt: "A-25", caption: "" },
+    { src: "img/a-30.jpg", alt: "A-30", caption: "" },
+    { src: "img/a-31.jpg", alt: "A-31", caption: "" },
+    // ... 他のAカテゴリ画像
+  ],
+  B: [
+    {
+      src: "img/b-4.jpg",
+      alt: "B-4",
+      caption: "他施工例も掲載しております。ご確認ください。",
+    },
+    { src: "img/b-5.jpg", alt: "B-5", caption: "" },
+    { src: "img/b-6.jpg", alt: "B-6", caption: "" },
+    { src: "img/b-7.jpg", alt: "B-7", caption: "" },
+    { src: "img/b-10.jpg", alt: "B-10", caption: "" },
+    { src: "img/b-2.jpg", alt: "B-2", caption: "" },
+    { src: "img/b-11.jpg", alt: "B-11", caption: "" },
+    { src: "img/b-14.jpg", alt: "B-14", caption: "" },
+    { src: "img/b-19.jpg", alt: "B-19", caption: "" },
+    { src: "img/b-20.jpg", alt: "B-20", caption: "" },
+    // ... 他のBカテゴリ画像
+  ],
+  D: [
+    {
+      src: "img/d-3.jpg",
+      alt: "D-3",
+      caption: "他施工例も掲載しております。ご確認ください。",
+    },
+    { src: "img/d-4.jpg", alt: "D-4", caption: "" },
+    { src: "img/d-6.jpg", alt: "D-6", caption: "" },
+    { src: "img/d-2.jpg", alt: "D-2", caption: "" },
+    { src: "img/a-25.jpg", alt: "A-25", caption: "" },
+    { src: "img/d-7.jpg", alt: "D-7", caption: "" },
+    { src: "img/d-8.jpg", alt: "D-8", caption: "" },
+    // ... 他のDカテゴリ画像
+  ],
+  E: [
+    { src: "img/e-1.jpg", alt: "E-1", caption: "" },
+    { src: "img/e-8.jpg", alt: "E-8", caption: "" },
+    { src: "img/e-10.jpg", alt: "E-10", caption: "" },
+    { src: "img/e-14.jpg", alt: "E-14", caption: "雨の日も..." },
+    { src: "img/e-13.jpg", alt: "E-13", caption: "晴れの日も..." },
+    { src: "img/e-19.jpg", alt: "E-19", caption: "雪の日も..." },
+    { src: "img/e-16.jpg", alt: "E-16", caption: "" },
+    { src: "img/e-17.jpg", alt: "E-17", caption: "" },
+    { src: "img/e-18.jpg", alt: "E-18", caption: "" },
+    { src: "img/e-22.jpg", alt: "E-22", caption: "" },
+    { src: "img/e-23.jpg", alt: "E-23", caption: "" },
+    { src: "img/e-24.jpg", alt: "E-24", caption: "" },
+    { src: "img/e-45.jpg", alt: "E-45", caption: "" },
+    { src: "img/e-25.jpg", alt: "E-25", caption: "50数年前...（１）" },
+    { src: "img/e-28.jpg", alt: "E-28", caption: "50数年前...（２）" },
+    { src: "img/e-29.jpg", alt: "E-29", caption: "50数年前...（３）" },
+    { src: "img/e-21.jpg", alt: "E-21", caption: "" },
+    { src: "img/e-30.jpg", alt: "E-30", caption: "" },
+    { src: "img/e-31.jpg", alt: "E-31", caption: "" },
+    { src: "img/e-32.jpg", alt: "E-32", caption: "" },
+    { src: "img/e-34.jpg", alt: "E-34", caption: "" },
+    { src: "img/e-35.jpg", alt: "E-35", caption: "" },
+    { src: "img/e-36.jpg", alt: "E-36", caption: "" },
+    { src: "img/e-38.jpg", alt: "E-38", caption: "" },
+    { src: "img/e-44.jpg", alt: "E-44", caption: "" },
+    // ... 他のEカテゴリ画像
+  ],
+  X: [
+    { src: "img/sky.png", alt: "X-1", caption: "" },
+    { src: "img/kkk.png", alt: "X-2", caption: "" },
+    { src: "img/mmm.png", alt: "X-3", caption: "" },
+    { src: "img/vvv.png", alt: "X-4", caption: "" },
+    { src: "img/yyy.png", alt: "X-5", caption: "" },
+    // ... 他のXカテゴリ画像
+  ],
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const lightbox = document.getElementById("lightbox");
   const lightboxImage = document.getElementById("lightbox-image");
   const lightboxImageWrapper = document.querySelector(
-    ".lightbox-image-wrapper"
+    ".lightbox-image-wrapper",
   );
   const lightboxCaption = document.querySelector(".lightbox-caption");
   const closeBtn = document.querySelector(".close-btn");
@@ -273,90 +365,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // 💡 新しく追加した要素の取得
   const captionText = document.getElementById("caption-text");
   const pageCounter = document.getElementById("page-counter");
-
-  // 💡 全画像データ: コメント (caption) を追加
-  const allImageData = {
-    A: [
-      {
-        src: "img/a-1.jpg",
-        alt: "A-1",
-        caption: "他施工例も掲載しております。ご確認ください。",
-      },
-      { src: "img/a-2.jpg", alt: "A-2", caption: "" },
-      { src: "img/a-3.jpg", alt: "A-3", caption: "" },
-      { src: "img/a-4.jpg", alt: "A-4", caption: "" },
-      { src: "img/a-5.jpg", alt: "A-5", caption: "" },
-      { src: "img/a-6.jpg", alt: "A-6", caption: "" },
-      { src: "img/a-8.jpg", alt: "A-8", caption: "" },
-      { src: "img/a-21.jpg", alt: "A-21", caption: "" },
-      { src: "img/a-22.jpg", alt: "A-22", caption: "" },
-      { src: "img/a-23.jpg", alt: "A-23", caption: "" },
-      { src: "img/a-24.jpg", alt: "A-24", caption: "" },
-      // { src: "img/a-25.jpg", alt: "A-25", caption: "" },
-      { src: "img/a-30.jpg", alt: "A-30", caption: "" },
-      { src: "img/a-31.jpg", alt: "A-31", caption: "" },
-      // ... 他のAカテゴリ画像
-    ],
-    B: [
-      {
-        src: "img/b-4.jpg",
-        alt: "B-4",
-        caption: "他施工例も掲載しております。ご確認ください。",
-      },
-      { src: "img/b-5.jpg", alt: "B-5", caption: "" },
-      { src: "img/b-6.jpg", alt: "B-6", caption: "" },
-      { src: "img/b-7.jpg", alt: "B-7", caption: "" },
-      { src: "img/b-10.jpg", alt: "B-10", caption: "" },
-      { src: "img/b-2.jpg", alt: "B-2", caption: "" },
-      { src: "img/b-11.jpg", alt: "B-11", caption: "" },
-      { src: "img/b-14.jpg", alt: "B-14", caption: "" },
-      { src: "img/b-19.jpg", alt: "B-19", caption: "" },
-      { src: "img/b-20.jpg", alt: "B-20", caption: "" },
-      // ... 他のBカテゴリ画像
-    ],
-    D: [
-      {
-        src: "img/d-3.jpg",
-        alt: "D-3",
-        caption: "他施工例も掲載しております。ご確認ください。",
-      },
-      { src: "img/d-4.jpg", alt: "D-4", caption: "" },
-      { src: "img/d-6.jpg", alt: "D-6", caption: "" },
-      { src: "img/d-2.jpg", alt: "D-2", caption: "" },
-      { src: "img/a-25.jpg", alt: "A-25", caption: "" },
-      { src: "img/d-7.jpg", alt: "D-7", caption: "" },
-      { src: "img/d-8.jpg", alt: "D-8", caption: "" },
-      // ... 他のDカテゴリ画像
-    ],
-    E: [
-      { src: "img/e-1.jpg", alt: "E-1", caption: "" },
-      { src: "img/e-8.jpg", alt: "E-8", caption: "" },
-      { src: "img/e-10.jpg", alt: "E-10", caption: "" },
-      { src: "img/e-14.jpg", alt: "E-14", caption: "雨の日も..." },
-      { src: "img/e-13.jpg", alt: "E-13", caption: "晴れの日も..." },
-      { src: "img/e-19.jpg", alt: "E-19", caption: "雪の日も..." },
-      { src: "img/e-16.jpg", alt: "E-16", caption: "" },
-      { src: "img/e-17.jpg", alt: "E-17", caption: "" },
-      { src: "img/e-18.jpg", alt: "E-18", caption: "" },
-      { src: "img/e-22.jpg", alt: "E-22", caption: "" },
-      { src: "img/e-23.jpg", alt: "E-23", caption: "" },
-      { src: "img/e-24.jpg", alt: "E-24", caption: "" },
-      { src: "img/e-45.jpg", alt: "E-45", caption: "" },
-      { src: "img/e-25.jpg", alt: "E-25", caption: "50数年前...（１）" },
-      { src: "img/e-28.jpg", alt: "E-28", caption: "50数年前...（２）" },
-      { src: "img/e-29.jpg", alt: "E-29", caption: "50数年前...（３）" },
-      { src: "img/e-21.jpg", alt: "E-21", caption: "" },
-      { src: "img/e-30.jpg", alt: "E-30", caption: "" },
-      { src: "img/e-31.jpg", alt: "E-31", caption: "" },
-      { src: "img/e-32.jpg", alt: "E-32", caption: "" },
-      { src: "img/e-34.jpg", alt: "E-34", caption: "" },
-      { src: "img/e-35.jpg", alt: "E-35", caption: "" },
-      { src: "img/e-36.jpg", alt: "E-36", caption: "" },
-      { src: "img/e-38.jpg", alt: "E-38", caption: "" },
-      { src: "img/e-44.jpg", alt: "E-44", caption: "" },
-      // ... 他のEカテゴリ画像
-    ],
-  };
 
   let currentCategory = null;
   let currentCategoryImages = [];
@@ -392,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
             lightboxImageWrapper.classList.add("show");
           }
         },
-        animate ? animationDuration : 0
+        animate ? animationDuration : 0,
       );
     }
   }
@@ -439,7 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const category = trigger.getAttribute("data-category");
       const index = parseInt(
         trigger.getAttribute("data-index-in-category"),
-        10
+        10,
       );
 
       // 💡 カテゴリを特定し、表示する画像の配列を準備
@@ -448,7 +456,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentCategoryImages = allImageData[category];
       } else {
         console.error(
-          `指定されたカテゴリ (${category}) のデータが見つかりません。`
+          `指定されたカテゴリ (${category}) のデータが見つかりません。`,
         );
         return;
       }
@@ -500,7 +508,7 @@ document.addEventListener("DOMContentLoaded", () => {
     (e) => {
       touchStartX = e.changedTouches[0].screenX;
     },
-    { passive: true }
+    { passive: true },
   );
 
   // タッチ終了時の位置を比較してスワイプ判定
@@ -510,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
       touchEndX = e.changedTouches[0].screenX;
       handleSwipe();
     },
-    { passive: true }
+    { passive: true },
   );
 
   function handleSwipe() {
@@ -555,4 +563,35 @@ document.addEventListener("DOMContentLoaded", function () {
   if (window.innerWidth >= 1200) {
     mainNav.classList.remove("is-open");
   }
+});
+
+// 💡 全画像データをフラットな配列にする
+const allImages = Object.values(allImageData).flat();
+
+// 1. 1枚だけ読み込むPromise関数
+function preloadSingleImage(item) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.src = item.src;
+    img.onload = () => resolve(); // 読み込み完了
+    img.onerror = () => resolve(); // エラーでも次へ進む
+  });
+}
+
+// 2. 順番に読み込むメイン関数（バックグラウンド実行）
+async function startBackgroundPreload(images) {
+  for (const item of images) {
+    await preloadSingleImage(item);
+    // 💡 1枚読み込むごとに少し休憩（0.2秒）を入れると、よりブラウザに優しい
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    console.log(`Preloaded: ${item.src}`);
+  }
+}
+
+// 3. 実行の制御
+window.addEventListener("load", () => {
+  // ページ自体の表示が完全に終わってから、ひっそりと読み込みを開始
+  setTimeout(() => {
+    startBackgroundPreload(allImages);
+  }, 1000); // 1秒待ってから開始
 });
